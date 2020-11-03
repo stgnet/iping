@@ -1,6 +1,6 @@
 // +build !linux
 
-package iperf
+package iping
 
 import "errors"
 
