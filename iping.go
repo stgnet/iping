@@ -11,18 +11,18 @@ import (
 	"time"
 )
 
-
 type Results struct {
-	IP net.IP
-	Sent   int
-	Received int
-	Response []time.Duration
-	Average time.Duration
+	IP         net.IP
+	Sent       int
+	Received   int
+	Response   []time.Duration
+	ResponseMs []int64
+	Average    time.Duration
 }
 
 type Options struct {
 	Target string // address to ping
-	Count int // number of pings to send (default 1)
+	Count  int    // number of pings to send (default 1)
 	IfName string // optional name of interface to bind to
 }
 
@@ -142,6 +142,7 @@ func (opt *Options) Ping() (result Results, err error) {
 			}
 
 			result.Response = append(result.Response, elapsed)
+			result.ResponseMs = append(result.ResponseMs, elapsed.Milliseconds())
 			result.Received++
 
 			total := time.Duration(0)
