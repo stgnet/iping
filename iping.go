@@ -112,6 +112,7 @@ func (opt *Options) Ping() (result Results, err error) {
 			_, err = conn.Read(recvBuf)
 			if err != nil {
 				// this is probably a timeout error, drop out of read loop
+				err = nil
 				break
 			}
 			elapsed := time.Now().Sub(sent)
